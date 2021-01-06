@@ -1,0 +1,40 @@
+stages:
+  - compile
+  - test
+  - publish
+
+variables:
+  SBT_OPTS: "-Xmx4G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Xss2M"
+
+before_script:
+  - docker login -u $nexus_username -p $nexus_password toil-ubuntu.westeurope.cloudapp.azure.com:5043
+
+compile:
+  stage: compile
+  cache: {}
+  tags:
+    - native
+  script:
+    - sbt +clean +compile
+
+test:
+  stage: test
+  cache: {}
+  tags:
+    - native
+  script:
+    - sbt ";++2.13.4;clean;coverage;test;coverageReport;"
+    - cp -r modules/core/target/scala-2.13/scoverage-report/ public/
+  artifacts:
+    paths:
+      - public
+    reports:
+      junit: modules/tests/target/junit-report/TEST-*.xml
+
+publish:
+  stage: publish
+  cache: {}
+  script:
+    - sbt +clean +coverageOff +publish
+  tags:
+    - native
