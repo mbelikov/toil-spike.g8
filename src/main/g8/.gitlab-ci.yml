@@ -7,7 +7,7 @@ variables:
   SBT_OPTS: "-Xmx4G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Xss2M"
 
 before_script:
-  - docker login -u $nexus_username -p $nexus_password toil-ubuntu.westeurope.cloudapp.azure.com:5043
+  - docker login -u \$nexus_username -p \$nexus_password toil-ubuntu.westeurope.cloudapp.azure.com:5043
 
 compile:
   stage: compile
