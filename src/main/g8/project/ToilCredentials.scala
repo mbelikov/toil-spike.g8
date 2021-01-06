@@ -12,10 +12,10 @@ object ToilCredentials {
   def credentialsFromEnvironmentVars(): Option[Credentials] = {
     val nexusUidNexusPwdMaybe = Option(System.getenv().get(uidProp)) match {
       case None if System.getProperty(uidProp) != null =>
-        println(s"nexus username (sys props): ${System.getProperty(uidProp)}")
+        println(s"nexus username (sys props): \${System.getProperty(uidProp)}")
         Some((System.getProperty(uidProp), System.getProperty(pwdProp)))
       case Some(_) =>
-        println(s"nexus username (env props): ${System.getenv().get(uidProp)}")
+        println(s"nexus username (env props): \${System.getenv().get(uidProp)}")
         Some((System.getenv().get(uidProp), System.getenv().get(pwdProp)))
       case _ =>
         None
