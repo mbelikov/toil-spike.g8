@@ -12,11 +12,12 @@ lazy val root = (project in file("."))
   .aggregate(core.js, core.jvm, tests.js, tests.jvm)
   .settings(crossScalaVersions := Nil) // crossScalaVersions must be set to Nil on the aggregating project
   .settings(publish / skip := true)
-  .settings(coverageJvm / aggregate := false)
+//  .settings(coverageJvm / aggregate := false)
 
 lazy val core = (crossProject(JSPlatform, JVMPlatform) in file("modules/core"))
   .settings(name := "$name$-core")
   .settings(commonSettings)
+  .settings(Defaults.itSettings)
   .settings(makeBatScripts := Seq())
   .settings(sharedDependencies)
   .jsSettings(coverageEnabled := false)
@@ -26,6 +27,7 @@ lazy val tests = (crossProject(JSPlatform, JVMPlatform) in file("modules/tests")
   .configs(IntegrationTest)
   .settings(name := "$name$-test-suite")
   .settings(commonSettings)
+  .settings(Defaults.itSettings)
   .settings(sharedDependencies)
   .settings(testDependencies)
   .settings(testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-u", "modules/tests/target/junit-report"))
@@ -34,11 +36,12 @@ lazy val tests = (crossProject(JSPlatform, JVMPlatform) in file("modules/tests")
   .dependsOn(core)
 
 lazy val commonSettings = Seq(
-  addCompilerPlugin(Libraries.kindProjector cross CrossVersion.full),
-  addCompilerPlugin(Libraries.betterMonadicFor),
+  libraryDependencies ++= Seq(
+        compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
+        compilerPlugin(Libraries.betterMonadicFor)
+      ),
   crossScalaVersions := supportedScalaVersions,
-  scalafmtOnCompile := true,
-  Defaults.itSettings,
+  scalafmtOnCompile := true
   //    scalacOptions += "-Ymacro-annotations",   // scala 2.13 only, how???
 //  update / evictionWarningOptions := EvictionWarningOptions.empty,
 //  Compile / console / scalacOptions := {
@@ -48,8 +51,6 @@ lazy val commonSettings = Seq(
 //      .filterNot(Scalac.Lint.toSet)
 //      .filterNot(Scalac.FatalWarnings.toSet) :+ "-Wconf:any:silent"
 //  },
-  Test / console / scalacOptions :=
-      (Compile / console / scalacOptions).value
 )
 
 // main dependencies

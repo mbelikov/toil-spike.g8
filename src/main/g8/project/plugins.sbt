@@ -9,7 +9,7 @@ addSbtPlugin("com.timushev.sbt" % "sbt-updates"  % "0.5.1")
 addSbtPlugin("io.spray"         % "sbt-revolver" % "0.9.1")
 //addSbtPlugin("org.wartremover"  % "sbt-wartremover" % "2.4.13")
 
-addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat"             % "0.1.11")
+addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat"             % "0.1.16")
 addSbtPlugin("com.timushev.sbt"          % "sbt-updates"              % "0.5.1")
 addSbtPlugin("com.typesafe.sbt"          % "sbt-git"                  % "1.0.0")
 addSbtPlugin("org.scalameta"             % "sbt-scalafmt"             % "2.4.2")
