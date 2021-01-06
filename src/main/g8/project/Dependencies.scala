@@ -96,7 +96,7 @@ object Dependencies {
     val scalaTestPlus  = "org.scalatestplus" %% "scalacheck-1-14"                % Versions.scalaTestPlus
     val zioTest        = "dev.zio"           %% "zio-test"                       % Versions.zio % testWithIt
     val zioTestSbt     = "dev.zio"           %% "zio-test-sbt"                   % Versions.zio % testWithIt
-    val testContainers = "com.dimafeng"      %% "testcontainers-scala-scalatest" % Versions.testContainers % testWithIt
+    val testContainers = "com.dimafeng"      %% "testcontainers-scala-scalatest" % Versions.containersScalaVersion % testWithIt
 
     val monocleCore  = "com.github.julien-truffaut" %% "monocle-core"  % Versions.monocle % testWithIt
     val monocleMacro = "com.github.julien-truffaut" %% "monocle-macro" % Versions.monocle % testWithIt
