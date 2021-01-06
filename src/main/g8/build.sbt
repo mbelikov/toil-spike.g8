@@ -12,6 +12,7 @@ lazy val root = (project in file("."))
   .aggregate(core.js, core.jvm, tests.js, tests.jvm)
   .settings(crossScalaVersions := Nil) // crossScalaVersions must be set to Nil on the aggregating project
   .settings(publish / skip := true)
+  .settings(publishArtifact := false) // skip aether deployment/publishing)
 //  .settings(coverageJvm / aggregate := false)
 
 lazy val core = (crossProject(JSPlatform, JVMPlatform) in file("modules/core"))

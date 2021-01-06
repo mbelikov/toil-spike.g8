@@ -2,6 +2,15 @@ import Util._
 
 ThisBuild / organization := "$organization;format="lower,package"$"
 
+ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
+ThisBuild / credentials ++= ToilCredentials.createCredentials().toSeq
+
+ThisBuild / publishTo := {
+  val nexus = "https://$toilNexus;format="lower,package"$/nexus/"
+  if (isSnapshot.value) Some("toil-publish-snapshots" at nexus + "repository/maven-snapshots")
+  else Some("toil-publish-releases" at nexus + "repository/maven-releases")
+}
+
 Global / concurrentRestrictions := Seq(
   Tags.limit(Tags.CPU, 4),
   Tags.limit(Tags.Network, 10),
