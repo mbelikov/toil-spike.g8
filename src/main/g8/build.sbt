@@ -41,7 +41,15 @@ lazy val commonSettings = Seq(
         compilerPlugin(Libraries.betterMonadicFor)
       ),
   crossScalaVersions := supportedScalaVersions,
-  scalafmtOnCompile := true
+  scalafmtOnCompile := true,
+  semanticdbEnabled := true, // enable SemanticDB
+  semanticdbOptions += "-P:semanticdb:synthetics:on",
+  semanticdbVersion := scalafixSemanticdb.revision, // use Scalafix compatible version
+  ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value),
+  ThisBuild / scalafixDependencies ++= List(
+        "com.github.liancheng" %% "organize-imports" % "0.4.4",
+        "com.github.vovapolu"  %% "scaluzzi"         % "0.1.16"
+      )
   //    scalacOptions += "-Ymacro-annotations",   // scala 2.13 only, how???
 //  update / evictionWarningOptions := EvictionWarningOptions.empty,
 //  Compile / console / scalacOptions := {

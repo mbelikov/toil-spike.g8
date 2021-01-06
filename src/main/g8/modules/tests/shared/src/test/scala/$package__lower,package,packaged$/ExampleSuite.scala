@@ -1,7 +1,10 @@
 package $package;format="lower,package"$
 
-final class ExampleSuite extends TestSuite {
-  test("hello world") {
-    1 shouldBe 1
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+
+final class ExampleSuite extends AnyFunSpec {
+  describe("hello world") {
+    it("should run") { 1 shouldBe 1 }
   }
 }
