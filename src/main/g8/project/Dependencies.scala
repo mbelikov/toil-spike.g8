@@ -21,6 +21,8 @@ object Dependencies {
     val quicklens = "1.6.1"
     val shapeless = "2.3.3"
     val circe = "0.13.0"
+    val circeExtras = "0.13.0"
+    val monocle     = "2.0.3"
 
     val cats          = "2.1.1"
     val catsEffect    = "2.1.3"
