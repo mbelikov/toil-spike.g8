@@ -2,7 +2,7 @@ import sbt._
 
 object ToilCredentials {
   val toilNexusRealm = "Sonatype Nexus Repository Manager"
-  val toilNexusHost = "$toilNexusHost;format="lower,word"$"
+  val toilNexusHost = "$toilNexus;format="lower,word"$"
   val uidProp = "nexus_username"
   val pwdProp = "nexus_password"
 
