@@ -6,14 +6,14 @@ object Dependencies {
     val pureConfig         = "0.13.0"
     val pureConfigRefinedV = "0.9.15"
 
-    val newtype    = "0.4.3"
+    val newtype    = "0.4.4"
     val refined    = "0.9.14"
     val skunk      = "0.0.9"
     val squants    = "1.6.0"
     val enumeratum = "1.6.1"
 
     val betterMonadicFor = "0.3.1"
-    val kindProjector    = "0.11.1"
+    val kindProjector    = "0.11.2"
     val logback          = "1.2.3"
 
     val jodaTime    = "2.10"
@@ -33,10 +33,10 @@ object Dependencies {
     val zioInteropVersion = "2.1.4.0"
     val zioLogging        = "0.4.0"
 
-    val scalaCheck             = "1.14.3"
-    val scalaTest              = "3.1.1"
+    val scalaCheck             = "1.15.2"
+    val scalaTest              = "3.2.3"
     val containersScalaVersion = "0.38.7"
-    val scalaTestPlus          = "3.1.1.1"
+    val scalaTestPlus          = "3.2.2.0"
     val specs2                 = "4.5.1"
 
     val toilProtobuf      = "1.7.0-SNAPSHOT"
