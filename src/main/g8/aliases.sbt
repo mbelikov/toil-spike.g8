@@ -8,7 +8,9 @@ addCommandAlias("root", "cd $name;format="norm"$")
 addCommandAlias("c", "+ compile")
 addCommandAlias("ca", "+ test:compile")
 addCommandAlias("t", "+ test")
-addCommandAlias("prepare", "fmt; fix; ca; t")
+addCommandAlias("prepare", "+clean; fix; fmt; ca; t; doc")
+addCommandAlias("fmt", "all root/scalafmtSbt root/scalafmtAll")
+addCommandAlias("fix", "all compile:scalafix test:scalafix; all scalafmtSbt scalafmtAll")
 addCommandAlias("publishAll", "aetherDeploy")
 addCommandAlias(
   "up2date",
