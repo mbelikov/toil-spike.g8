@@ -13,7 +13,9 @@ lazy val root = (project in file("."))
   .settings(crossScalaVersions := Nil) // crossScalaVersions must be set to Nil on the aggregating project
   .settings(publish / skip := true)
   .settings(publishArtifact := false) // skip aether deployment/publishing)
-//  .settings(coverageJvm / aggregate := false)
+  //  .settings(coverageJvm / aggregate := false)
+  .settings(releaseCrossBuild := false) // don't use sbt-release's cross facility
+  .settings(crossReleaseSettings)
 
 lazy val core = (crossProject(JSPlatform, JVMPlatform) in file("modules/core"))
   .settings(name := "$name$-core")
@@ -83,5 +85,21 @@ lazy val testDependencies = Seq(
         Libraries.scalaCheck,
         Libraries.scalaTest,
         Libraries.scalaTestPlus
+      )
+)
+// applied workaround from https://www.scala-sbt.org/release/docs/Cross-Build.html
+lazy val crossReleaseSettings = Seq(
+  releaseProcess := Seq[ReleaseStep](
+        checkSnapshotDependencies,
+        inquireVersions,
+        releaseStepCommandAndRemaining("+clean"),
+        releaseStepCommandAndRemaining("+test"),
+        setReleaseVersion,
+        commitReleaseVersion,
+        tagRelease,
+        releaseStepCommandAndRemaining("+publish"),
+        setNextVersion,
+        commitNextVersion,
+        pushChanges
       )
 )
